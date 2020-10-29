@@ -21,21 +21,22 @@ class Graph{
         int ** adjMatrix;
         vector<Edge> edges;
         int numOfVertex;
+        int * dist;
     public:
         Graph(int numOfVertex);
         void addEdge(int v1, int v2,int weight);
         void printGraph();
-        void initilizeDist(int src,int * dist);
-        void relax(int u, int v, int weight, int * dist);
+        void initilizeDist(int src);
+        void relax(int u, int v);
         int bellmanFord(int src,int dest);
-        void printDistances(int * dist );
+        void printDistances();
 
 };
 Graph::Graph(int numOfVertex){
     this->numOfVertex = numOfVertex;
     this->adjMatrix = new int*[this->numOfVertex];
-    for(int i = 0 ; i < this->numOfVertex ; i++){
-        
+    dist = new int[this->numOfVertex];
+    for(int i = 0 ; i < this->numOfVertex ; i++){  
         this->adjMatrix[i] = new int[this->numOfVertex];
         memset(adjMatrix[i],0,sizeof(int)*this->numOfVertex);
     }
@@ -59,32 +60,31 @@ void Graph::printGraph(){
     }
 }
 
-void Graph::initilizeDist(int src,int * dist){
+void Graph::initilizeDist(int src){
     for(int i = 0;i<this->numOfVertex;i++){
         dist[i] = infinity; 
     }
     dist[src] = 0;
 }
 
-void Graph::relax(int u, int v, int weight, int * dist){
-    if(dist[v]>dist[u] + weight){
-        dist[v] = dist[u] + weight;
+void Graph::relax(int u, int v){
+    int weightUV = adjMatrix[u][v];
+    if(dist[v]>dist[u] + weightUV){
+        dist[v] = dist[u] + weightUV;
     }
 }
 
 int Graph::bellmanFord(int src, int dest){
-    int dist[this->numOfVertex];
-    initilizeDist(src,dist);
-    for(int i = 1;i<this->numOfVertex-1;i++){
-        for(int j = 0;j<edges.size();j++){
-            Edge edge = edges.at(j);
-            relax(edge.src,edge.dest,edge.weight,dist);
+    initilizeDist(src);
+    for(int i = 0;i<this->numOfVertex-1;i++){
+        for(Edge &edge : edges){
+            relax(edge.src,edge.dest);
         }
     }
     return dist[dest];
 }
 
-void Graph::printDistances(int * dist){
+void Graph::printDistances(){
     for(int i= 0;i<this->numOfVertex;i++){
         cout<<dist[i]<<endl;
     }
@@ -100,4 +100,7 @@ int main(){
     }
     cin>>u>>v;
     cout<<g.bellmanFord(u,v)<<endl;
+
+    //g.printDistances();
+
 }
