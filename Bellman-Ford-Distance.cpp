@@ -100,7 +100,4 @@ int main(){
     }
     cin>>u>>v;
     cout<<g.bellmanFord(u,v)<<endl;
-
-    //g.printDistances();
-
 }
