@@ -50,12 +50,12 @@ class PriorityQueue{
         }
         /*Retorna o valor da chave passada por parametro*/
         int getKeyValue(int vertex){
-            return priorityQueue[vertex] != -1 ? priorityQueue[vertex] : valuesOfRemovedKeys[vertex];//se a chave já foi removida, retorna seu antigo valor
+            return keyIsOnQueue(vertex) ? priorityQueue[vertex] : valuesOfRemovedKeys[vertex];//se a chave já foi removida, retorna seu antigo valor
         }
         /*Verifica se a fila esta vazia*/
         bool isEmpty(){
             for(int i=0;i<priorityQueue.size() ; i++){
-                if(priorityQueue[i]!=-1){
+                if(keyIsOnQueue(i)){
                     return false;
                 }
             }
