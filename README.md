@@ -1,7 +1,7 @@
 # TP-PAA
 Repositório destinado ao trabalho prático da matéria Projeto e Análise de Algoritmos
 
-###Parte escrita com o detalhamento do trabalho está disponível no arquivo Trabalho_de_PAA.pdf
+### Parte escrita com o detalhamento do trabalho está disponível no arquivo Trabalho_de_PAA.pdf
 
 ### Como executar o algoritmo de Dijkstra
 Compilar o código `make build_Dijkstra`
